@@ -3,4 +3,3 @@ node_modules
 dist
 .env
 public
-src/configs/config.ts
