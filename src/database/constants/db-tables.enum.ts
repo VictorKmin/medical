@@ -4,4 +4,5 @@ export enum DataBaseTableNames {
     USER_STATUS = 'user_status',
     ROLE = 'role',
     USER = 'user',
+    SPECIALTY = 'specialty',
 }

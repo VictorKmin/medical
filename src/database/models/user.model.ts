@@ -7,29 +7,32 @@ import { db } from '../db.provider';
 import { RoleDBModel } from './role.model';
 import { GroupDBModel } from './group.model';
 import { UserStatusDBModel } from './user-status.model';
-import { CourseDBModel } from './course.model';
+import { SpecialtyDBModel } from './specialty.model';
 
 export interface IUserModel {
     id: number;
+    name: string;
     email: string;
     password: string;
     role_id: number;
     status_id: number;
     group_id?: number;
-    course_id?: number;
+    specialty_id?: number;
+    course?: number;
     created_at: string;
     updated_at?: string;
-    name: string;
 }
 
 export interface IUser {
     id: number;
-    email: string;
-    status_id: number;
     name: string;
+    email: string;
     role_id: number;
-    phone?: string;
-    created_at?: string;
+    status_id: number;
+    group_id?: number;
+    specialty_id?: number;
+    course?: number;
+    created_at: string;
 }
 
 const modelAttributes: DBModelFieldInit<IUserModel> = {
@@ -68,7 +71,10 @@ const modelAttributes: DBModelFieldInit<IUserModel> = {
     group_id: {
       type: DataTypes.INTEGER
     },
-    course_id: {
+    specialty_id: {
+      type: DataTypes.INTEGER
+    },
+    course: {
         type: DataTypes.INTEGER
     },
     created_at: {
@@ -91,7 +97,7 @@ UserDBModel.init(
         timestamps: false
     }
 );
-UserDBModel.belongsTo(CourseDBModel, { foreignKey: 'course_id' });
+UserDBModel.belongsTo(SpecialtyDBModel, { foreignKey: 'specialty_id' });
 UserDBModel.belongsTo(GroupDBModel, { foreignKey: 'group_id' });
 UserDBModel.belongsTo(RoleDBModel, { foreignKey: 'role_id' });
 UserDBModel.belongsTo(UserStatusDBModel, { foreignKey: 'status_id' });
