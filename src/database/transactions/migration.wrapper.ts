@@ -9,12 +9,7 @@ export const migrationWrapper = async (method: (options: QueryOptions) => Promis
     try {
         await method(options);
         await transaction.commit();
-    } catch (e) {
+    } catch {
         await transaction.rollback();
-        // tslint:disable
-        console.log('________________________');
-        console.log(e);
-        console.log('________________________');
-        // tslint:enable
     }
 };

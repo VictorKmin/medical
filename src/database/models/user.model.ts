@@ -4,10 +4,10 @@ import { RegExpEnum, UserStatusEnum } from '../../constants';
 import { DataBaseTableNames } from '../constants';
 import { DBModelFieldInit } from '../db-structure.model';
 import { db } from '../db.provider';
-import { RoleDBModel } from './role.model';
 import { GroupDBModel } from './group.model';
-import { UserStatusDBModel } from './user-status.model';
+import { RoleDBModel } from './role.model';
 import { SpecialtyDBModel } from './specialty.model';
+import { UserStatusDBModel } from './user-status.model';
 
 export interface IUserModel {
     id: number;

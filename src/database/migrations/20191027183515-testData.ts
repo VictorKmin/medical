@@ -1,6 +1,7 @@
 // tslint:disable max-line-length
 
 import { QueryInterface, QueryOptions } from 'sequelize';
+import { DataBaseTableNames } from '../constants';
 
 import { migrationWrapper } from '../transactions';
 
@@ -11,15 +12,15 @@ export default {
             // #####################################
             // ROLE TEST DATA
             // #####################################
-            await queryInterface.sequelize.query(`INSERT INTO role (id, label) VALUES (1, 'Student')`, options);
-            await queryInterface.sequelize.query(`INSERT INTO role (id, label) VALUES (2, 'Teacher')`, options);
-            await queryInterface.sequelize.query(`INSERT INTO role (id, label) VALUES (3, 'Admin')`, options);
+            await queryInterface.sequelize.query(`INSERT INTO ${DataBaseTableNames.ROLE} (id, label) VALUES (1, 'Student')`, options);
+            await queryInterface.sequelize.query(`INSERT INTO ${DataBaseTableNames.ROLE} (id, label) VALUES (2, 'Teacher')`, options);
+            await queryInterface.sequelize.query(`INSERT INTO ${DataBaseTableNames.ROLE} (id, label) VALUES (3, 'Admin')`, options);
 
             // #####################################
             // USER_STATUS TEST DATA
             // #####################################
-            await queryInterface.sequelize.query(`INSERT INTO user_status (id, label) VALUES (1, 'Active')`, options);
-            await queryInterface.sequelize.query(`INSERT INTO user_status (id, label) VALUES (2, 'Blocked')`, options);
+            await queryInterface.sequelize.query(`INSERT INTO ${DataBaseTableNames.USER_STATUS} (id, label) VALUES (1, 'Active')`, options);
+            await queryInterface.sequelize.query(`INSERT INTO ${DataBaseTableNames.USER_STATUS} (id, label) VALUES (2, 'Blocked')`, options);
         };
 
         await migrationWrapper(migration);
@@ -29,26 +30,13 @@ export default {
         const migration = async (options: QueryOptions) => {
             await queryInterface.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', options);
 
-            await queryInterface.sequelize.query(`TRUNCATE TABLE transaction`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE vote`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE comment`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE action_token`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE oauth_token`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE milestone`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE phase`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE phase_status`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE document`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE project`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE project_category`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE project_status`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE organization`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE user`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE user_status`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE country`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE document_type`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE role`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE action`, options);
-            await queryInterface.sequelize.query(`TRUNCATE TABLE constant`, options);
+            await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.USER}`, options);
+            await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.OAUTH_TOKEN}`, options);
+            await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.SPECIALTY}`, options);
+            await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.GROUP}`, options);
+            await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.COURSE}`, options);
+            await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.USER_STATUS}`, options);
+            await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.ROLE}`, options);
 
             await queryInterface.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', options);
         };

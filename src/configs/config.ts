@@ -9,5 +9,5 @@ export const config = {
     DB_NAME: process.env.DB_NAME || 'medical',
     DB_USER: process.env.DB_USER || 'user',
     DB_PASS: process.env.DB_PASS || 'user',
-    DB_HOST: process.env.DB_HOST || 'localhost',
+    DB_HOST: process.env.DB_HOST || 'localhost'
 };

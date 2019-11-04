@@ -5,8 +5,8 @@ import { DBModelFieldInit } from '../db-structure.model';
 import { db } from '../db.provider';
 
 export interface IRoleModel {
-    id?: number;
-    label?: string;
+    id: number;
+    label: string;
 }
 
 const modelAttributes: DBModelFieldInit<IRoleModel> = {

@@ -1,4 +1,4 @@
-import { ModelAttributes, QueryInterface, QueryOptions } from 'sequelize';
+import { DataTypes, ModelAttributes, QueryInterface, QueryOptions } from 'sequelize';
 
 // tslint:disable max-line-length
 import { UserRolesEnum, UserStatusEnum } from '../../constants';
@@ -6,11 +6,12 @@ import { DataBaseTableNames } from '../constants';
 import { DBModelFieldInit } from '../db-structure.model';
 import {
   IGroupModel,
+  IOauthTokenModel,
+  ISpecialtyModel,
   IRoleModel,
   IUserModel,
-  IUserStatusModel,
+  IUserStatusModel
 } from '../models';
-import { ISpecialtyModel } from '../models/specialty.model';
 import { migrationWrapper } from '../transactions';
 
 export default {
@@ -93,7 +94,7 @@ export default {
           onDelete: 'SET NULL' // TODO SET DEFAULT
         },
         course: {
-          type: dataTypes.INTEGER,
+          type: dataTypes.INTEGER
         },
         specialty_id: {
           type: dataTypes.INTEGER,
@@ -133,6 +134,32 @@ export default {
         }
       };
       await queryInterface.createTable(DataBaseTableNames.USER, userModelAttributes as ModelAttributes, options);
+
+      const ouathTokenModel: DBModelFieldInit<IOauthTokenModel> = {
+        id: {
+          type: DataTypes.INTEGER,
+          primaryKey: true
+        },
+        user_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          references: {
+            model: DataBaseTableNames.USER,
+            key: 'id'
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        },
+        access_token: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        refresh_token: {
+          type: DataTypes.STRING,
+          allowNull: false
+        }
+      }
+      await queryInterface.createTable(DataBaseTableNames.OAUTH_TOKEN, ouathTokenModel as ModelAttributes, options);
 
       return Promise.resolve();
     };
