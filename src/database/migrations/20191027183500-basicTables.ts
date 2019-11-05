@@ -10,6 +10,7 @@ import {
   ISpecialtyModel,
   IRoleModel,
   IUserModel,
+  IUserActionModel,
   IUserStatusModel
 } from '../models';
 import { migrationWrapper } from '../transactions';
@@ -64,6 +65,18 @@ export default {
         }
       };
       await queryInterface.createTable(DataBaseTableNames.USER_STATUS, userStatusModelAttributes as ModelAttributes, options);
+
+      const userActionModelAttributes: DBModelFieldInit<IUserActionModel> = {
+        id: {
+          type: dataTypes.INTEGER,
+          primaryKey: true,
+          unique: true
+        },
+        label: {
+          type: dataTypes.STRING
+        }
+      };
+      await queryInterface.createTable(DataBaseTableNames.USER_STATUS, userActionModelAttributes as ModelAttributes, options);
 
       const userModelAttributes: DBModelFieldInit<IUserModel> = {
         id: {

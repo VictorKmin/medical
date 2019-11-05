@@ -20,7 +20,14 @@ export default {
             // USER_STATUS TEST DATA
             // #####################################
             await queryInterface.sequelize.query(`INSERT INTO ${DataBaseTableNames.USER_STATUS} (id, label) VALUES (1, 'Active')`, options);
+
             await queryInterface.sequelize.query(`INSERT INTO ${DataBaseTableNames.USER_STATUS} (id, label) VALUES (2, 'Blocked')`, options);
+            // #####################################
+            // USER_ACTION TEST DATA
+            // #####################################
+            await queryInterface.sequelize.query(`INSERT INTO ${DataBaseTableNames.USER_ACTION} (id, label) VALUES (1, 'auth')`, options);
+            await queryInterface.sequelize.query(`INSERT INTO ${DataBaseTableNames.USER_ACTION} (id, label) VALUES (2, 'confirm email')`, options);
+            await queryInterface.sequelize.query(`INSERT INTO ${DataBaseTableNames.USER_ACTION} (id, label) VALUES (3, 'reset password')`, options);
         };
 
         await migrationWrapper(migration);
@@ -36,6 +43,7 @@ export default {
             await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.GROUP}`, options);
             await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.COURSE}`, options);
             await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.USER_STATUS}`, options);
+            await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.USER_ACTION}`, options);
             await queryInterface.sequelize.query(`TRUNCATE TABLE ${DataBaseTableNames.ROLE}`, options);
 
             await queryInterface.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', options);

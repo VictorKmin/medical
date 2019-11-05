@@ -8,3 +8,5 @@ export interface IDBResponse<T> {
     dataValues: T;
     [index: string]: any;
 }
+export type PropType<T, K extends keyof T> = T[K];
+export interface IDictionary<T> { [index: string]: T }

@@ -5,7 +5,7 @@ import { DBModelFieldInit } from '../db-structure.model';
 import { db } from '../db.provider';
 
 export interface IOauthTokenModel {
-    id: number;
+    id?: number;
     user_id: number;
     access_token: string;
     refresh_token: string;
