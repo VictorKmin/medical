@@ -11,10 +11,10 @@ class AuthController {
 
     loginUser = (req: IRequestExtended, res: Response, next: NextFunction) => {
         return transactionWrapper(this._loginUser);
-    };
+    }
 
     private async _loginUser(req: IRequestExtended, res: Response, next: NextFunction, transaction: Transaction) {
-        const {id} = req.user as IUserModel;
+        const { id } = req.user as IUserModel;
         const tokens = tokenizer(UserActionEnum.AUTH);
 
         await oauthService.createOauthToke({

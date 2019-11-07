@@ -7,10 +7,10 @@ import { DBModelFieldInit } from '../db-structure.model';
 import {
   IGroupModel,
   IOauthTokenModel,
-  ISpecialtyModel,
   IRoleModel,
-  IUserModel,
+  ISpecialtyModel,
   IUserActionModel,
+  IUserModel,
   IUserStatusModel
 } from '../models';
 import { migrationWrapper } from '../transactions';
@@ -171,7 +171,7 @@ export default {
           type: DataTypes.STRING,
           allowNull: false
         }
-      }
+      };
       await queryInterface.createTable(DataBaseTableNames.OAUTH_TOKEN, ouathTokenModel as ModelAttributes, options);
 
       return Promise.resolve();

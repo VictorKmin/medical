@@ -16,7 +16,7 @@ class UserService {
             attributes
         }) as any;
 
-        return user && user.dataValues
+        return user && user.dataValues;
     }
 
     createUser(user: IUserModel, transaction: Transaction) {

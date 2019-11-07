@@ -11,7 +11,7 @@ class OAuthService {
     }
 
     createOauthToke(createObject: IOauthTokenModel, transaction: Transaction): Promise<void> {
-        return OauthTokenDBModel.create(createObject, {transaction}) as any;
+        return OauthTokenDBModel.create(createObject, { transaction }) as any;
     }
 
     deleteOathTokenByParams(deleteObject: WhereOptions, transaction: Transaction) {

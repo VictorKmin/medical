@@ -9,7 +9,7 @@ import { resolve as resolvePath } from 'path';
 
 import { config } from './configs';
 import { ResponseStatusCodesEnum } from './constants';
-import { apiRouter, notFoundRouter, authRouter } from './routers';
+import { apiRouter, authRouter, notFoundRouter } from './routers';
 
 const serverRequestLimiter = new RateLimit({
     windowMs: config.serverRateLimits.period,
@@ -28,7 +28,7 @@ class App {
         this.app.set('jwtTokenSecret', config.JWT_SECRET);
         this.app.use(cors());
         this.app.use(serverRequestLimiter);
-        this.app.use(express.urlencoded({extended: false}));
+        this.app.use(express.urlencoded({ extended: false }));
         this.app.use(express.static(resolvePath((global as any).appRoot + '/public')));
 
         this.mountRoutes();

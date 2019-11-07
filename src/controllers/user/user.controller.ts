@@ -1,12 +1,12 @@
 import { NextFunction, Response } from 'express';
-import { Transaction } from 'sequelize';
 import * as Joi from 'joi';
+import { Transaction } from 'sequelize';
 
 import { ResponseStatusCodesEnum } from '../../constants';
+import { transactionWrapper } from '../../database';
 import { ErrorHandler } from '../../errors';
 import { HASH_PASSWORD } from '../../helpers';
 import { IRequestExtended } from '../../models';
-import { transactionWrapper } from '../../database';
 import { userService } from '../../services';
 import { userValidator } from '../../validators';
 
@@ -21,7 +21,7 @@ class UserController {
 
     createUser = (req: IRequestExtended, res: Response, next: NextFunction) => {
         return transactionWrapper(this._createUser);
-    };
+    }
 
     private async _createUser(req: IRequestExtended, res: Response, next: NextFunction, transaction: Transaction) {
         const user = req.body;

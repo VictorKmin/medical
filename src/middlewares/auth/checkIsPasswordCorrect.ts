@@ -8,8 +8,8 @@ import { IRequestExtended } from '../../models';
 
 export const checkIsPasswordCorrect = async (req: IRequestExtended, res: Response, next: NextFunction) => {
 
-    const {password: hashPassword} = req.user as IUserModel;
-    const {password} = req.body as IUserModel;
+    const { password: hashPassword } = req.user as IUserModel;
+    const { password } = req.body as IUserModel;
 
     const isPasswordCorrect = await CHECK_HASH(password, hashPassword);
 

@@ -1,4 +1,5 @@
 // tslint:disable max-line-length
+// tslint:disable tsr-detect-sql-literal-injection
 
 import { QueryInterface, QueryOptions } from 'sequelize';
 import { DataBaseTableNames } from '../constants';
