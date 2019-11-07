@@ -1,1 +1,2 @@
-export * from './checkIsUserPresent';
+export * from './checkIsEmailPresent';
+export * from './checkIsUserExists';

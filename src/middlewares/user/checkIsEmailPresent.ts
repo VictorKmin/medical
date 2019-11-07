@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { ResponseStatusCodesEnum } from '../../constants';
 
+import { ResponseStatusCodesEnum } from '../../constants';
 import { ErrorHandler, errors } from '../../errors';
 import { userService } from '../../services';
 
-export const checkIsUserPresent = async (req: Request, res: Response, next: NextFunction) => {
+export const checkIsEmailPresent = async (req: Request, res: Response, next: NextFunction) => {
     const { email } = req.body;
     const isUserPresent = await userService.getUserByParams({ email });
 

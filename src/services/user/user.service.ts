@@ -22,6 +22,13 @@ class UserService {
     createUser(user: IUserModel, transaction: Transaction) {
         return UserDBModel.create(user, { transaction });
     }
+
+    updateUserByParams(updateObject: Partial<IUserModel>, paramsObject: WhereOptions, transaction: Transaction): Promise<any> {
+        return UserDBModel.update(updateObject, {
+            where: paramsObject,
+            transaction
+        });
+    }
 }
 
 export const userService = new UserService();

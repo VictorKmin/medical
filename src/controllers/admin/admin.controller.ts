@@ -1,17 +1,23 @@
 import { NextFunction, Response } from 'express';
 import { Transaction } from 'sequelize';
 
-import { ResponseStatusCodesEnum, UserActionEnum } from '../../constants';
+import { ResponseStatusCodesEnum, UserActionEnum, UserStatusEnum } from '../../constants';
 import { IUserModel, transactionWrapper } from '../../database';
 import { ErrorHandler, errors } from '../../errors';
 import { CHECK_HASH, tokenizer } from '../../helpers';
 import { IRequestExtended } from '../../models';
-import { oauthService } from '../../services';
+import { oauthService, userService } from '../../services';
 
 class AdminController {
 
     authAdmin = (req: IRequestExtended, res: Response, next: NextFunction) => {
         return transactionWrapper(this._authAdmin);
+    }
+    blockUser = (req: IRequestExtended, res: Response, next: NextFunction) => {
+        return transactionWrapper(this._blockUser);
+    }
+    unblockUser = (req: IRequestExtended, res: Response, next: NextFunction) => {
+        return transactionWrapper(this._unblockUser);
     }
 
     private _authAdmin = async (req: IRequestExtended, res: Response, next: NextFunction, transaction: Transaction) => {
@@ -55,6 +61,29 @@ class AdminController {
         res.json({
             data: tokens
         });
+    }
+
+    private _blockUser = async (req: IRequestExtended, res: Response, next: NextFunction, transaction: Transaction) => {
+        const { status_id, id } = req.user as IUserModel;
+
+        if (status_id === UserStatusEnum.BLOCKED) {
+            throw new ErrorHandler(ResponseStatusCodesEnum.BAD_REQUEST, 'User is already blocked');
+        }
+
+        await userService.updateUserByParams({ status_id: UserStatusEnum.BLOCKED }, { id }, transaction);
+
+        res.end();
+    }
+    private _unblockUser = async (req: IRequestExtended, res: Response, next: NextFunction, transaction: Transaction) => {
+        const { status_id, id } = req.user as IUserModel;
+
+        if (status_id === UserStatusEnum.ACTIVE) {
+            throw new ErrorHandler(ResponseStatusCodesEnum.BAD_REQUEST, 'User is already activated');
+        }
+
+        await userService.updateUserByParams({ status_id: UserStatusEnum.ACTIVE }, { id }, transaction);
+
+        res.end();
     }
 }
 

@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-import { checkIsUserPresent } from '../../middlewares';
+import { checkIsEmailPresent } from '../../middlewares';
 import { userController } from '.././../controllers';
 
 const router = Router();
 
 router.get('/', userController.getUsers);
-router.post('/', checkIsUserPresent, userController.createUser);
+router.post('/', checkIsEmailPresent, userController.createUser);
 
 export const userRouter = router;
