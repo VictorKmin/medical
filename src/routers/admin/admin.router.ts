@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { checkIsAdmin, checkIsUserExists } from '../../middlewares';
 
+import { checkIsAdmin, checkIsUserExists } from '../../middlewares';
 import { adminController } from '.././../controllers';
 
 const router = Router();
