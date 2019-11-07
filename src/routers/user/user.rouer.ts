@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { checkIsUserPresent } from '../../middlewares/user';
 
+import { checkIsUserPresent } from '../../middlewares';
 import { userController } from '.././../controllers';
 
 const router = Router();

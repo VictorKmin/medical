@@ -1,6 +1,9 @@
-import { Transaction, WhereOptions } from 'sequelize';
+import { Op, Transaction, WhereOptions } from 'sequelize';
 
-import { IOauthTokenModel, OauthTokenDBModel } from '../../database';
+import { UserRolesEnum } from '../../constants';
+import { IDBResponse, IOauthTokenModel, IUser, IUserModel, OauthTokenDBModel, UserDBModel } from '../../database';
+
+const attributes: Array<keyof IUser> = ['id', 'name', 'name', 'email', 'group_id', 'role_id', 'specialty_id', 'status_id'];
 
 class OAuthService {
 
@@ -19,6 +22,51 @@ class OAuthService {
             where: deleteObject,
             transaction
         });
+    }
+
+    async getUserFromAccessToken(access_token: string): Promise<IUser> {
+        const dbResponse: any = await OauthTokenDBModel.findOne({
+            where: {
+                access_token: {
+                    [Op.like]: access_token
+                }
+            },
+            include: [{
+                model: UserDBModel,
+                attributes
+            }]
+        });
+
+        return dbResponse && dbResponse.user && dbResponse.user.dataValues;
+    }
+
+    async getUserFromRefreshToken(refresh_token: string): Promise<any> {
+        const dbResponse: any = await OauthTokenDBModel.findOne({
+            where: {
+                refresh_token: {
+                    [Op.like]: refresh_token
+                }
+            },
+            include: [{
+                model: UserDBModel,
+                attributes
+            }]
+        });
+
+        return dbResponse && dbResponse.user && dbResponse.user.dataValues;
+    }
+
+    async authAdmin(email: string): Promise<IUserModel> {
+        const user: IDBResponse<IUserModel> = await UserDBModel.findOne({
+            where: {
+                email,
+                role_id: {
+                    [Op.eq]: UserRolesEnum.ADMIN
+                }
+            }
+        }) as any;
+
+        return user && user.dataValues;
     }
 }
 

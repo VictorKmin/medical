@@ -5,6 +5,12 @@ export const errors = {
         code: 4001
     },
 
+    // 401
+    UNAUTHORIZED_WRONG_CREDENTIALS: {
+        code: 4011,
+        message: 'Wrong email or password'
+    },
+
     // 403
     FORBIDDEN_USER_BLOCKED: { // When user try to do something with blocked account
         message: 'User is blocked',
