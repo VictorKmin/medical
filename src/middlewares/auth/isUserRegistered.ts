@@ -8,7 +8,7 @@ import { userService } from '../../services';
 import { emailValidator } from '../../validators';
 
 export const checkIsUserRegistered = async (req: IRequestExtended, res: Response, next: NextFunction) => {
-    const {email} = req.body;
+    const { email } = req.body;
 
     const isEmailValid = Joi.validate(email, emailValidator);
 
@@ -16,7 +16,7 @@ export const checkIsUserRegistered = async (req: IRequestExtended, res: Response
         throw new ErrorHandler(ResponseStatusCodesEnum.BAD_REQUEST, isEmailValid.error.details[0].message);
     }
 
-    const user = await userService.getUserByParams({email});
+    const user = await userService.getUserByParams({ email });
 
     if (!user) {
         return next(
@@ -29,5 +29,5 @@ export const checkIsUserRegistered = async (req: IRequestExtended, res: Response
 
     req.user = user;
 
-    next()
+    next();
 };

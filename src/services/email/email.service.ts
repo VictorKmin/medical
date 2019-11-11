@@ -3,7 +3,7 @@ import * as nodemailer from 'nodemailer';
 import { resolve as resolvePath } from 'path';
 
 import { config } from '../../configs';
-import { UserActionEnum, ResponseStatusCodesEnum } from '../../constants';
+import { ResponseStatusCodesEnum, UserActionEnum } from '../../constants';
 import { htmlTemplates } from '../../email-templates';
 import { ErrorHandler } from '../../errors';
 

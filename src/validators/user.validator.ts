@@ -9,4 +9,4 @@ export const userValidator = Joi.object().keys({
     role_id: Joi.number().integer().min(1).required(),
     course: Joi.number().allow(null, ''),
     group_id: Joi.number().integer().min(1).allow('', null)
-})
+});

@@ -1,13 +1,12 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { ResponseStatusCodesEnum } from '../../constants';
 
-import { errors, ErrorHandler } from '../../errors';
+import { ErrorHandler, errors } from '../../errors';
 import { userService } from '../../services';
 
 export const checkIsUserPresent = async (req: Request, res: Response, next: NextFunction) => {
-    const {email} = req.body;
-    const isUserPresent = await userService.getUserByParams({email});
-
+    const { email } = req.body;
+    const isUserPresent = await userService.getUserByParams({ email });
 
     if (isUserPresent) {
         return next(

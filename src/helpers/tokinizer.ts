@@ -1,7 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 
 import { config } from '../configs';
-import { UserActionEnum, ResponseStatusCodesEnum } from '../constants';
+import { ResponseStatusCodesEnum, UserActionEnum } from '../constants';
 import { ErrorHandler } from '../errors';
 
 export const tokenizer = (method: number): any => {

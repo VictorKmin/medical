@@ -1,1 +1,1 @@
-export * from './html-templates'
+export * from './html-templates';
