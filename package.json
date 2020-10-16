@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    
     "test": "echo \"Error: no test specified\" && exit 1",
     "app:start": "node ./dist/",
     "start": "rimraf dist && npm run tslint && copyfiles -u 2 src/email-templates/*.hbs dist/email-templates/ && tsc-watch --outDir ./dist --onSuccess \"npm run app:start\" --onFailure \"'echo Compilation Failed'\"",
