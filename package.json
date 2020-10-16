@@ -19,7 +19,7 @@
     "first": "sequelize db:create && npx sequelize-cli db:migrate"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-fileupload": "latest",
